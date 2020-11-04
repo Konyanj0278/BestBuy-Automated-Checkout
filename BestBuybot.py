@@ -25,9 +25,9 @@ class BBYbot():
 		self.driver.get(self.url)
 
 	def Login(self):
-		self.driver.find_element_by_xpath('/html/body/div[2]/div/div/div/header/div[2]/div[2]/div/nav[2]/ul/li[1]/button/div[2]/span').click()
+		self.driver.find_element_by_class_name("BtnTxt").click()
 		time.sleep(.5)
-		self.driver.find_element_by_xpath('/html/body/div[2]/div/div/div/header/div[2]/div[2]/div/nav[2]/ul/li[1]/div/div/div/div/div[2]/div/div/a/button').click()
+		self.driver.find_element_by_class_name("btn-secondary").click()
 		time.sleep(2)
 		username_input=self.driver.find_element_by_xpath('/html/body/div[1]/div/section/main/div[1]/div/div/div/div/form/div[1]/div/input')
 		username_input.send_keys(self.username)
@@ -68,8 +68,8 @@ class BBYbot():
 			time.sleep(3)
 			item =self.driver.find_element_by_class_name('btn-lg')
 			item.click()
-			time.sleep(2)							
-			go_to_cart_button= self.driver.find_element_by_xpath('/html/body/div[7]/div/div[1]/div/div/div/div/div[1]/div[3]/a')
+			time.sleep(5)							
+			go_to_cart_button= self.driver.find_element_by_class_name("go-to-cart-button")
 			
 			go_to_cart_button.click()
 			incart=True
@@ -112,7 +112,7 @@ root=tk.Tk()
 searchtag=''
 root.title("BBYbot")
 root.geometry("400x500")
-
+'''
 text=tk.Label(root, text="Welcome to the BestBuy Bot made for \ngetting RTX 30 Series GPUs",font=("Helvetica", 16) )
 infotext=tk.Label(root, text="Edit Config file and add personal info",font=("Helvetica", 16))
 text.pack()
@@ -137,6 +137,7 @@ try:
 	bot.Login()
 except:
 	bot.closeEmailprompt()
+	time.sleep(3)
 	bot.Login()
 time.sleep(4)
 bot.searchtag("8720312")
@@ -149,11 +150,5 @@ print("In cart!")
 time.sleep(1)
 #bot.checkout()
 
-root=Tk()
-
-root.title("BBYbot")
-root.geomentry("400x500")
-
 print("compiled")
 bot.close()
-'''
