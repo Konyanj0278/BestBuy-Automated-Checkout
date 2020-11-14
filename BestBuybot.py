@@ -52,7 +52,7 @@ class BBYbot():
 		time.sleep(5)
 		try:
 			
-			item = self.driver.find_elements_by_class_name('btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button')
+			item = self.driver.find_element_by_class_name('btn-lg')
 			#webdriver.ActionChains(self.driver).click_and_hold(self.driver.find_elements_by_class_name('btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button')).perform()
 			#webdriver.ActionChains(self.driver).release().preform()
 			print("In stock!")
@@ -108,27 +108,7 @@ def getinput():
 	return sku_num
 
 print("Starting Bot")
-root=tk.Tk()
 searchtag=''
-root.title("BBYbot")
-root.geometry("400x500")
-'''
-text=tk.Label(root, text="Welcome to the BestBuy Bot made for \ngetting RTX 30 Series GPUs",font=("Helvetica", 16) )
-infotext=tk.Label(root, text="Edit Config file and add personal info",font=("Helvetica", 16))
-text.pack()
-infotext.pack()
-sku=tk.Label(root, text="Enter the SKU of the GPU you want", font=("Helvetica", 16))
-sku.pack()
-skunumber=tk.Entry(root)
-skunumber.pack()
-sku= tk.Button(root,text="Enter",command=getinput())
-print(sku)
-sku.pack()
-#text.pack()
-#text.insert(tk.END, "Welcome to the BestBuy Bot")
-root.mainloop()
-
-'''
 config_file= ConfigParser()
 config_file.read("config.ini")
 bot = BBYbot(config_file)
@@ -140,7 +120,7 @@ except:
 	time.sleep(3)
 	bot.Login()
 time.sleep(4)
-bot.searchtag("8720312")
+bot.searchtag("6429440")
 instock= bot.in_stock()
 incart=False
 if (instock==True):
