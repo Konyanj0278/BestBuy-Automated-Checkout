@@ -44,7 +44,9 @@ class BBYbot():
 			return
 
 	def searchtag(self, search_tag):
+		#Create Product URL 
 		product_url = "https://www.bestbuy.com/site/product/{sku}.p?skuId={sku}".format(sku=search_tag)
+		#Redirect browser to product URL
 		self.driver.get(product_url)
 		time.sleep(5)
 
