@@ -44,9 +44,9 @@ class BBYbot():
 			return
 
 	def searchtag(self, search_tag):
-		searchbar=self.driver.find_element_by_class_name('search-input')
-		searchbar.send_keys(search_tag)
-		searchbar.submit()
+		product_url = "https://www.bestbuy.com/site/product/{sku}.p?skuId={sku}".format(sku=search_tag)
+		self.driver.get(product_url)
+		time.sleep(5)
 
 	def in_stock(self):
 		time.sleep(5)
