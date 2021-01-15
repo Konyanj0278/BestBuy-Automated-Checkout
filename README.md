@@ -1,6 +1,9 @@
  BestBuy-Automated-Checkout
 A bot to constantly run and purchase item on BestBuy.com
 
+Update 1/21
+
+Since creating this bot BestBuy has changed the its checkout process to where human verification is required, as I am a student I have not had the chance to update the bot to circumvent this. I will post updates when possible. Thank you for all the support.
 
 Hello all,
 
