@@ -27,6 +27,12 @@ How to use:
 5) Edit the code and change the field of bot.searctag() to contain the sku that you want, do note that this field takes a string and    not an integer. 
 6) Run bot and Enjoy
 
+### How to preorder pokemon journeys booster boxes:
+
+1) Follow the steps above to set up the bot.
+2) Edit the code and change the field of bot.searchtag() to contain the SKU "6614262".
+3) Run the bot and it will search for the pokemon journeys booster boxes and attempt to preorder it.
+
 Picture of code working:
 
 ![BestBuy Bot Succsess](https://user-images.githubusercontent.com/55165705/98168055-df014300-1e9e-11eb-9eeb-f8911be903d2.JPG)
