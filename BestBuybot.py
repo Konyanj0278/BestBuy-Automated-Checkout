@@ -7,6 +7,9 @@ import urllib.request
 import os
 from configparser import ConfigParser
 import tkinter as tk
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 class BBYbot():
 	def __init__(self,config):
@@ -73,30 +76,35 @@ class BBYbot():
 			
 			go_to_cart_button.click()
 			incart=True
+			print("Item added to cart!")
+			self.send_email_alert()
 			return incart
 			
 		except:
 			print("Couldnt add to cart trying again")
 			incart=False
-	def checkout(self):
-		time.sleep(3)
-		#selects shipping
-		self.driver.find_element_by_xpath('/html/body/div[1]/main/div/div[2]/div[1]/div/div/span/div/div[1]/div[1]/section[1]/div[4]/ul/li/section/div[2]/div[2]/form/div[2]/fieldset/div[2]/div[1]/div/div/div/input').click()
-		#presses checkout
-		self.driver.find_element_by_xpath('/html/body/div[1]/main/div/div[2]/div[1]/div/div/span/div/div[1]/div[1]/section[2]/div/div/div[3]/div/div[1]/button').click()
-		#continues to payment
-		time.sleep(2)
-		self.driver.find_element_by_xpath('/html/body/div[3]/div[2]/div/div/div[1]/div[1]/main/div[2]/div[2]/form/section/div/div[2]/div/div/button').click()
-		time.sleep(4)
-		paymentinfo=self.driver.find_element_by_xpath('/html/body/div[3]/div[2]/div/div/div[1]/div[1]/main/div[2]/div[3]/div/section/div[1]/div/section/div[1]/div/input')
-		paymentinfo.send_keys(self.card)
-		selectmm = Select(self.driver.find_element_by_name('expiration-month'))
-		selectmm.select_by_visible_text(self.expm)
-		selectyy = Select(self.driver.find_element_by_name('expiration-year'))
-		selectyy.select_by_visible_text(self.expy)
-		securitycode=self.driver.find_element_by_xpath('/html/body/div[3]/div[2]/div/div/div[1]/div[1]/main/div[2]/div[3]/div/section/div[1]/div/section/div[2]/div[2]/div/div[2]/div/input')
-		securitycode.send_keys(self.cardsecurity)
-		self.driver.find_element_by_xpath('/html/body/div[3]/div[2]/div/div/div[1]/div[1]/main/div[2]/div[3]/div/section/div[4]/button').click()
+
+	def send_email_alert(self):
+		sender_email = "your_email@example.com"
+		receiver_email = "your_email@example.com"
+		password = "your_email_password"
+
+		message = MIMEMultipart("alternative")
+		message["Subject"] = "Item Added to Cart"
+		message["From"] = sender_email
+		message["To"] = receiver_email
+
+		text = """\
+		Hi,
+		The item has been added to your cart. Please complete the checkout process."""
+		part = MIMEText(text, "plain")
+		message.attach(part)
+
+		with smtplib.SMTP_SSL("smtp.example.com", 465) as server:
+			server.login(sender_email, password)
+			server.sendmail(
+				sender_email, receiver_email, message.as_string()
+			)
 
 	def closeEmailprompt(self):
 		self.driver.find_element_by_class_name("c-modal-close-icon").click()
@@ -120,7 +128,7 @@ except:
 	time.sleep(3)
 	bot.Login()
 time.sleep(4)
-bot.searchtag("6429440")
+bot.searchtag("6614262")
 instock= bot.in_stock()
 incart=False
 if (instock==True):
@@ -128,7 +136,6 @@ if (instock==True):
 	 	incart=bot.add_toCart(incart)
 print("In cart!")
 time.sleep(1)
-#bot.checkout()
 
 print("compiled")
 bot.close()
